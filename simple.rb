@@ -2,8 +2,14 @@ require 'rubygems'
 require 'sinatra'
 
 get '/' do
-  @title = "Fly Me To The Moon"
-  erb :fly
+  @title = "Hello"
+  erb :form
+end
+
+post '/' do
+  @name = "#{params[:post][:first_name]} #{params[:post][:last_name]}"
+  @title = "Hello, #{@name}."
+  "Nice to meet you, #{@name}." # Notice erb is not called. This means the template below will not run.
 end
 
 # __END__ is a Ruby Macro which means anything that comes after is plain text - this is where our template starts.
@@ -24,5 +30,10 @@ __END__
 </body>
 </html>
 
-@@ fly
-Anything goes.
+@@ form
+What's your name?
+<form action="/" method="POST">
+  <input type="text" name="post[first_name]" value="First Name" size="20" />
+  <input type="text" name="post[last_name]" value="Last Name" size="20" />
+  <input type="submit" value="Say hi!">
+</form>
