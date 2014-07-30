@@ -2,21 +2,12 @@ require 'rubygems'
 require 'sinatra'
 
 get '/' do
-  "Feel like a wise guy, huh?"
+  erb :fly
 end
 
-get '/peepcode/?' do
-  "Well hello there, peepcode!"
-end
+# __END__ is a Ruby Macro which means anything that comes after is plain text - this is where our template starts.
+# @@ signifies the beginning of a template block in Sinatra
+__END__
 
-get '/hello/:name' do
-  "Hello #{params[:name]}"
-end
-
-get '/this/*/is/*' do
-  "this " + params[:splat].join(' is ')
-end
-
-get '/time' do
-  erb 'The time now is <%= Time.now.strftime("%I:%M:%S %p") %>'
-end
+@@ fly
+Fly me to the Moon.
